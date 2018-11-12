@@ -1,46 +1,82 @@
-import fetch from "node-fetch";
-import { load } from "cheerio";
+const fetch = require("node-fetch").default;
+const load = require("cheerio").load;
+const URL = require("url").URL;
 
-export const CONFIG = {
-  socialNetworks: ["facebook", "twitter", "linkedin", "pinterest", "tumblr", "soundcloud"]
+const CONFIG = {
+  socialNetworks: [
+    "facebook",
+    "twitter",
+    "linkedin",
+    "pinterest",
+    "tumblr",
+    "soundcloud",
+    "instagram",
+    "youtube"
+  ]
 };
 
-export const SUPPORTED_NETWORKS = ["facebook", "twitter", "linkedin", "pinterest", "tumblr", "soundcloud"]
+const SUPPORTED_NETWORKS = new Set([
+  "facebook",
+  "twitter",
+  "linkedin",
+  "pinterest",
+  "tumblr",
+  "soundcloud",
+  "instagram",
+  "youtube"
+]);
 
-const extractFromWebSite = async website => {
-  return fetch(website)
-    .then(res => res.text())
-    .then(body => {
-      const $ = load(body);
-      let result = {}
-      CONFIG.socialNetworks.forEach(socialNetwork => result[socialNetwork] = parseBody(socialNetwork));
-    })
-    .catch(
-      error =>
-        throw {
-          message: `Error fetching website data ${JSON.stringify(error)}`
-        }
+const CUSTOM_REGEX = {
+  youtube: `(channel/([\\w|@|-]+?)(?:/videos)?/?$|user?/([\\w|@|-]+)/?$)`
+};
+
+module.exports.default = async websites =>
+  Array.isArray(websites)
+    ? Promise.all(
+        websites.map(async website => ({
+          [website]: await parseWebsite(website)
+        }))
+      )
+    : [{ [websites]: await parseWebsite(websites) }];
+
+const parseWebsite = async website => {
+  try {
+    const html = await fetch(website).then(res => res.text());
+    const $ = load(html);
+    return CONFIG.socialNetworks.map(socialNetwork => ({
+      [socialNetwork]: parse(socialNetwork)($)
+    }));
+  } catch (error) {
+    throw new Error(
+      `Error fetching website data for ${website}: ${error.message}`
     );
+  }
 };
 
-const parseFacebook = (body) => (
+const getHandleFromURL = (url, customRegex = null) => {
+  try {
+    const path = new URL(url).pathname;
+    const regex = customRegex
+      ? new RegExp(customRegex, "i")
+      : new RegExp(`/([\\w|@|-]+)/?$`, "i");
+    const match = regex.exec(path);
+    return customRegex
+      ? match.find((match, index) => index > 1 && match != undefined)
+      : match[1];
+  } catch (error) {
+    //Unable to parse handle, return empty value
+    return "";
+  }
+};
 
-)
-
-const parseTwitter = (body) => (
-    const twitterHandles = $('a:regex(href,twitter)').attr('content')
-    let handles = []
-    twitterHandles.forEach(url => {
-        const handle = url.split('/')[-1]
-        handles.push(handle)
-    })
-    return twitterHandles
-)
-
-const parseLinkedIn = (body) => (
-
-)
-
-const parsePinterest = (body) => (
-
-)
+const parse = base => $ => {
+  let handles = [];
+  $(`a[href*="${base}"]`).each((index, elem) => {
+    const url = elem.attribs.href;
+    const handle = url ? getHandleFromURL(url, CUSTOM_REGEX[base] || "") : "";
+    handle && handles.push(handle);
+  });
+  return handles.filter(
+    (handle, index) => index === handles.indexOf(handle) && handle
+  );
+};

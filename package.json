@@ -2,9 +2,9 @@
   "name": "social-media-scaper",
   "version": "0.0.1",
   "description": "Scrapes social media handles out of websites.",
-  "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "node test/test-web.js",
+    "compile": "babel --presets es2015 -d /src -o build/index.budle.js"
   },
   "repository": {
     "type": "git",
@@ -25,5 +25,10 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
     "node-fetch": "^2.2.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "prettier": "1.15.1"
   }
 }
