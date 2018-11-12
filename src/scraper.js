@@ -2,7 +2,7 @@ const fetch = require("node-fetch").default;
 const load = require("cheerio").load;
 const URL = require("url").URL;
 
-const CONFIG = {
+module.exports.CONFIG = {
   socialNetworks: [
     "facebook",
     "twitter",
@@ -15,7 +15,7 @@ const CONFIG = {
   ]
 };
 
-const SUPPORTED_NETWORKS = new Set([
+module.exports.SUPPORTED_NETWORKS = new Set([
   "facebook",
   "twitter",
   "linkedin",
@@ -43,7 +43,7 @@ const parseWebsite = async website => {
   try {
     const html = await fetch(website).then(res => res.text());
     const $ = load(html);
-    return CONFIG.socialNetworks.map(socialNetwork => ({
+    return module.exports.CONFIG.socialNetworks.map(socialNetwork => ({
       [socialNetwork]: parse(socialNetwork)($)
     }));
   } catch (error) {

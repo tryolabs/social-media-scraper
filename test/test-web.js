@@ -1,4 +1,5 @@
 const extractFromWebSites = require("../src/scraper").default;
+const CONFIG = require("../src/scraper").CONFIG;
 
 const wait = async () =>
   await extractFromWebSites([
@@ -8,4 +9,5 @@ const wait = async () =>
   ])
     .then(res => console.log(JSON.stringify(res)))
     .catch(error => console.log(JSON.stringify(error)));
+
 wait();
