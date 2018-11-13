@@ -4,7 +4,7 @@
   "description": "Scrapes social media handles out of websites.",
   "scripts": {
     "test": "node test/test-web.js",
-    "compile": "babel --presets es2015 -d /src -o build/index.budle.js"
+    "compile": "babel --presets es2015 src -o index.js"
   },
   "repository": {
     "type": "git",
