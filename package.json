@@ -1,6 +1,6 @@
 {
   "name": "social-media-scraper",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Scrapes social media handles out of websites.",
   "scripts": {
     "test": "node test/test-web.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tryolabs/social-media-scaper.git"
+    "url": "git+https://github.com/tryolabs/social-media-scraper.git"
   },
   "keywords": [
     "social",
@@ -19,9 +19,9 @@
   "author": "Bruno Sena @tryolabs",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/tryolabs/social-media-scaper/issues"
+    "url": "https://github.com/tryolabs/social-media-scraper/issues"
   },
-  "homepage": "https://github.com/tryolabs/social-media-scaper#readme",
+  "homepage": "https://github.com/tryolabs/social-media-scraper#readme",
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
     "node-fetch": "^2.2.1"

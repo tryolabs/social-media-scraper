@@ -11,7 +11,8 @@ module.exports.CONFIG = {
     "tumblr",
     "soundcloud",
     "instagram",
-    "youtube"
+    "youtube",
+    "snapchat"
   ]
 };
 
@@ -23,7 +24,8 @@ module.exports.SUPPORTED_NETWORKS = new Set([
   "tumblr",
   "soundcloud",
   "instagram",
-  "youtube"
+  "youtube",
+  "snapchat"
 ]);
 
 const CUSTOM_REGEX = {
