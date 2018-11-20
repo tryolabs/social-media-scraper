@@ -45,9 +45,11 @@ const parseWebsite = async website => {
   try {
     const html = await fetch(website).then(res => res.text());
     const $ = load(html);
-    return module.exports.CONFIG.socialNetworks.map(socialNetwork => ({
-      [socialNetwork]: parse(socialNetwork)($)
-    }));
+    let handles = {};
+    module.exports.CONFIG.socialNetworks.forEach(socialNetwork => {
+      handles[socialNetwork] = parse(socialNetwork)($);
+    });
+    return handles;
   } catch (error) {
     throw new Error(
       `Error fetching website data for ${website}: ${error.message}`

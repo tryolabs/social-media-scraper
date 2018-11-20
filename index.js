@@ -7,10 +7,10 @@ var load = require("cheerio").load;
 var URL = require("url").URL;
 
 module.exports.CONFIG = {
-  socialNetworks: ["facebook", "twitter", "linkedin", "pinterest", "tumblr", "soundcloud", "instagram", "youtube"]
+  socialNetworks: ["facebook", "twitter", "linkedin", "pinterest", "tumblr", "soundcloud", "instagram", "youtube", "snapchat"]
 };
 
-module.exports.SUPPORTED_NETWORKS = new Set(["facebook", "twitter", "linkedin", "pinterest", "tumblr", "soundcloud", "instagram", "youtube"]);
+module.exports.SUPPORTED_NETWORKS = new Set(["facebook", "twitter", "linkedin", "pinterest", "tumblr", "soundcloud", "instagram", "youtube", "snapchat"]);
 
 var CUSTOM_REGEX = {
   youtube: "(channel/([\\w|@|-]+?)(?:/videos)?/?$|user?/([\\w|@|-]+)/?$)"
@@ -28,9 +28,11 @@ var parseWebsite = async function parseWebsite(website) {
       return res.text();
     });
     var $ = load(html);
-    return module.exports.CONFIG.socialNetworks.map(function (socialNetwork) {
-      return _defineProperty({}, socialNetwork, parse(socialNetwork)($));
+    var handles = {};
+    module.exports.CONFIG.socialNetworks.forEach(function (socialNetwork) {
+      handles[socialNetwork] = parse(socialNetwork)($);
     });
+    return handles;
   } catch (error) {
     throw new Error("Error fetching website data for " + website + ": " + error.message);
   }
