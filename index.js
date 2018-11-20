@@ -7,10 +7,10 @@ var load = require("cheerio").load;
 var URL = require("url").URL;
 
 module.exports.CONFIG = {
-  socialNetworks: ["facebook", "twitter", "linkedin", "pinterest", "tumblr", "soundcloud", "instagram", "youtube"]
+  socialNetworks: ["facebook", "twitter", "linkedin", "pinterest", "tumblr", "soundcloud", "instagram", "youtube", "snapchat"]
 };
 
-module.exports.SUPPORTED_NETWORKS = new Set(["facebook", "twitter", "linkedin", "pinterest", "tumblr", "soundcloud", "instagram", "youtube"]);
+module.exports.SUPPORTED_NETWORKS = new Set(["facebook", "twitter", "linkedin", "pinterest", "tumblr", "soundcloud", "instagram", "youtube", "snapchat"]);
 
 var CUSTOM_REGEX = {
   youtube: "(channel/([\\w|@|-]+?)(?:/videos)?/?$|user?/([\\w|@|-]+)/?$)"
