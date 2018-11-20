@@ -28,9 +28,11 @@ var parseWebsite = async function parseWebsite(website) {
       return res.text();
     });
     var $ = load(html);
-    return module.exports.CONFIG.socialNetworks.map(function (socialNetwork) {
-      return _defineProperty({}, socialNetwork, parse(socialNetwork)($));
+    var handles = {};
+    module.exports.CONFIG.socialNetworks.forEach(function (socialNetwork) {
+      handles[socialNetwork] = parse(socialNetwork)($);
     });
+    return handles;
   } catch (error) {
     throw new Error("Error fetching website data for " + website + ": " + error.message);
   }
