@@ -37,17 +37,17 @@ Returns an array of object containing the website's url containing and object in
 ```
 [
   {
-    "https://your-web-site.com/": [
-      { "facebook": ["YourHandle"] },
-      { "twitter": ["YourHandle"] },
-      { "linkedin": ["YourHandle"] },
-      { "pinterest": [] },
-      { "tumblr": [] },
-      { "soundcloud": [] },
-      { "instagram": [] },
-      { "youtube": ["YourHandle"] },
-      { "snapchat": [] }
-    ]
+    "https://your-web-site.com/": {
+       "facebook": ["YourHandle"],
+       "twitter": ["YourHandle"],
+       "linkedin": ["YourHandle"],
+       "pinterest": [],
+       "tumblr": [],
+       "soundcloud": [],
+       "instagram": [],
+       "youtube": ["YourHandle"],
+       "snapchat": []
+    }
   }
 ]
 ```
