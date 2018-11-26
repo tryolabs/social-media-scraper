@@ -1,6 +1,7 @@
 const fetch = require("node-fetch").default;
 const load = require("cheerio").load;
 const URL = require("url").URL;
+const normalizeUrl = require('normalize-url');
 
 module.exports.CONFIG = {
   socialNetworks: [
@@ -43,7 +44,8 @@ module.exports.default = async websites =>
 
 const parseWebsite = async website => {
   try {
-    const html = await fetch(website).then(res => res.text());
+    const url = normalizeUrl(website)
+    const html = await fetch(url).then(res => res.text());
     const $ = load(html);
     let handles = {};
     module.exports.CONFIG.socialNetworks.forEach(socialNetwork => {

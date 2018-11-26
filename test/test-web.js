@@ -5,7 +5,8 @@ const wait = async () =>
   await extractFromWebSites([
     "https://looker.com/",
     "https://www.hommework.com/",
-    "https://www.todoencctv.com/"
+    "https://www.todoencctv.com/",
+    "likealyzer.com"
   ])
     .then(res => console.log(JSON.stringify(res)))
     .catch(error => console.log(JSON.stringify(error)));

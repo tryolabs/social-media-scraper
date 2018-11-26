@@ -24,7 +24,8 @@
   "homepage": "https://github.com/tryolabs/social-media-scraper#readme",
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
-    "node-fetch": "^2.2.1"
+    "node-fetch": "^2.2.1",
+    "normalize-url": "^4.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
