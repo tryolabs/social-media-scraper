@@ -30,7 +30,7 @@ getHandles(website)
 
 ### Handles extractor
 
-### `getHandles(urls: Array<string> | string) => Array<{ [website]: { [social_network]: Array<string> }>`
+##### `getHandles(urls: Array<string> | string) => Array<{ [website]: { [social_network]: Array<string> }>`
 
 Returns an array of object containing the website's url containing and object in which the keys are the social network identifiers with the handles extracted attached.
 
@@ -58,5 +58,5 @@ Simply edit the ```socialMediaScraper.CONFIG``` array, supported social network 
 
 
 ```
-socialMediaScraper.CONFIG = ['twitter', 'facebook', 'my-space'].filter(id => socialMediaScraper.SUPPORTED_NETWORKS.has(id))
+socialMediaScraper.CONFIG = ['twitter', 'facebook', 'my-space']
 ```
