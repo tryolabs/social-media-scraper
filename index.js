@@ -5,6 +5,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var fetch = require("node-fetch").default;
 var load = require("cheerio").load;
 var URL = require("url").URL;
+var normalizeUrl = require('normalize-url');
 
 module.exports.CONFIG = {
   socialNetworks: ["facebook", "twitter", "linkedin", "pinterest", "tumblr", "soundcloud", "instagram", "youtube", "snapchat"]
@@ -24,7 +25,8 @@ module.exports.default = async function (websites) {
 
 var parseWebsite = async function parseWebsite(website) {
   try {
-    var html = await fetch(website).then(function (res) {
+    var url = normalizeUrl(website);
+    var html = await fetch(url).then(function (res) {
       return res.text();
     });
     var $ = load(html);
