@@ -1,6 +1,6 @@
 {
   "name": "social-media-scraper",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "description": "Scrapes social media handles out of websites.",
   "scripts": {
     "test": "node test/test-web.js",
